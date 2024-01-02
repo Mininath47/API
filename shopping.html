@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  
+  <style>
+    
+
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,400;0,6..12,500;0,6..12,600;0,6..12,1000;1,6..12,400;1,6..12,500;1,6..12,700;1,6..12,900;1,6..12,1000&family=Tangerine&display=swap');
+*{
+  margin: 0;
+  padding: 0;
+}
+body{
+  font-family: "poppins";
+}
+.myImages{
+  height: 250px;
+}
+.renderCardData{
+  width: 19.6%;
+  height: 340vh;
+  margin-top: -2.2rem;
+  background-color:#fff;
+  box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+}
+
+.navbar{
+  background-color: lightblue;
+  width: 80.3%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.cart-icon{
+  margin-right: 1.4rem;
+  position: relative;
+}
+.cart-icon i{
+  font-size: 25px;
+}
+.cart-icon sup{
+  position: absolute;
+  background-color: #fff;
+  font-weight: bold;
+  border-radius: 50%;
+  top: -25%;
+  right: -33%;
+  
+  padding: .1rem .2rem;
+}
+
+.main-container{
+  display: flex;
+  justify-content: space-between;
+}
+.renderData{
+  display: flex;
+  background-color: #fff;
+  margin-bottom: 1px;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 80%;
+  
+}
+.box-main{
+  width: 350px;
+  background-color: #fff;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+  display: flex;
+  align-items: center;
+  margin-top: 1rem;
+  margin-left: 1rem;
+  flex-direction: column;
+  border-radius: 3px;
+  padding: .8rem;
+
+}
+.box-main img{
+  width: 200px;
+  height: 200px;
+  margin-top: .3rem;
+}
+.productTitle{
+  font-size: 14px;
+  margin-top: .3rem;
+}
+.price-element{
+  font-size: 13px;
+  margin-top: .2rem;
+}
+.btnElement{
+  padding: .7rem 7rem;
+  margin-top: .7rem;
+  cursor: pointer;
+  border: none;
+  outline: none;
+  border-radius: 3rem;
+  background-color: lightblue;
+  font-weight: bold;
+}
+.cart-styling{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 1rem;
+}
+.fa-trash{
+  margin-right: 1rem;
+}
+.cartImageElement{
+  height: 55px;
+  width:60px;
+  margin-left: 1rem;
+}
+.cart-price{
+  font-size: 14px;
+}
+#Totle_Price{
+  font-size: 14px;
+  margin-left: 1rem;
+ 
+
+}
+.Tcontainer{
+  display: none;
+  justify-content: space-between;
+  margin-top: .5rem;
+}
+.line{
+  display: none;
+  margin-top: .5rem;
+}
+.Tcontainer button{
+  border: none;
+  outline: none;
+  background-color: lightblue;
+  color: black;
+  font-weight: bold;
+  padding: .1rem .3rem;
+  margin: .1rem .6rem;
+  cursor: pointer;
+}
+.emptyCart h1{
+  font-size: 25px;
+  text-align: center;
+  margin-top: .1rem;
+
+}
+.CItems{
+  display: none;
+  background-color: lightblue;
+  justify-content: center;
+  align-items: center;
+}
+.CItems h1{
+  font-size: 24px;
+  padding: .5rem 0rem;
+}
+  </style>
+
+</head>
+<body>
+
+  <div class="navbar-container">
+    <div class="navbar">
+      <div class="logo">
+        <img src="../public/image/shopping-sale.jpeg" width="50" height="30" alt="">
+      </div>
+      <div class="cart-icon">
+        <i class="fa-solid fa-cart-shopping"></i>
+        <sup class="dynamic-count">0</sup>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="main-container">
+
+  <div class="renderData"></div>
+  <div class="renderCardData">
+    <div class="emptyCart">
+    <h1>Your Cart Is Empty</h1>
+    </div>
+    <div class="YCArtItem">
+      <div class="CItems">
+        <h1>Your Cart Items</h1>
+      </div>
+    </div>
+    <div class="line">
+      <hr>
+    </div>
+    <div class="Tcontainer">
+    <p id="Totle_Price"></p>
+    <button>CheckOut</button>
+    </div>
+  </div>
+</div>
+
+
+
+  <script>
+    //Difine verible
+let renderData = document.querySelector(".renderData");
+let renderCardData = document.querySelector(".renderCardData");
+let dynamic_count = document.querySelector(".dynamic-count");
+let arry = [];
+let calculatTotle = [];
+let Totle_Price = document.getElementById("Totle_Price");
+let Tcontainer = document.querySelector(".Tcontainer");
+let line = document.querySelector(".line");
+let CItems = document.querySelector(".CItems");
+let emptyCart = document.querySelector(".emptyCart");
+let emptyC = false;
+
+// gate data form Api
+async function getData(){
+const res = await fetch("https://fakestoreapi.com/products");
+const data = await res.json();
+data.map((ele)=>{
+  let productMainDiv = document.createElement("div");
+  productMainDiv.setAttribute("class","box-main")
+  let createImgEle = document.createElement("img");
+createImgEle.setAttribute("src",ele.image);
+createImgEle.setAttribute("class","myImages");
+let createTitle = document.createElement("p");
+let btnEle = document.createElement("button");
+btnEle.setAttribute("class","btnElement")
+let btnText = document.createTextNode("Add To Cart");
+let createTextTitle = document.createTextNode(`${ele.title.slice(0,20)}...`);
+let createPriceEle = document.createElement("p");
+createPriceEle.setAttribute("class","price-element")
+let createPriceText = document.createTextNode(`Price : $${ele.price}`);
+createTitle.appendChild(createTextTitle);
+createPriceEle.appendChild(createPriceText);
+btnEle.appendChild(btnText);
+productMainDiv.appendChild(createImgEle);
+productMainDiv.appendChild(createTitle);
+createTitle.setAttribute("class","productTitle")
+productMainDiv.appendChild(createPriceEle);
+productMainDiv.appendChild(btnEle);
+renderData.appendChild(productMainDiv);
+ 
+function addToCart(img , price){
+  Tcontainer.style.display="flex";
+  line.style.display="block";
+  emptyC = true;
+  if(emptyC){
+    CItems.style.display="flex";
+    emptyCart.style.display="none";
+  }
+  // let myCData = [];
+  // myCData.push({m : img, r : price});
+  let creatMDiv = document.createElement("div");
+  creatMDiv.setAttribute("class","cart-styling")
+  arry.push({ii : img, pp : price})
+  alert("Product Added To cart");
+  dynamic_count.innerHTML++;
+  let cartImageEle = document.createElement("img");
+  let cardTrashBtn = document.createElement("i");
+  
+  function deleteItem(){
+    alert("Item Delet");
+    creatMDiv.remove();
+    dynamic_count.innerHTML--;
+  }
+  cardTrashBtn.addEventListener("click", deleteItem)
+  cardTrashBtn.setAttribute("class","fa-solid fa-trash");
+  cartImageEle.setAttribute("src",img);
+  cartImageEle.setAttribute("class","cartImageElement")
+  let cartPriceEle = document.createElement("p");
+  cartPriceEle.setAttribute("class","cart-price")
+  let cartPriceText = document.createTextNode(`$${price}`);
+  calculatTotle.push(price);
+let myTotle = calculatTotle.reduce((accum , curVal) => {
+  return accum + curVal;
+  
+})
+Totle_Price.innerHTML=`Totle Price : $${myTotle}`;
+  cartPriceEle.appendChild(cartPriceText);
+  creatMDiv.appendChild(cartImageEle);
+  creatMDiv.appendChild(cartPriceEle);
+  creatMDiv.appendChild(cardTrashBtn);
+  renderCardData.appendChild(creatMDiv);
+console.log("myImage : " + img);
+console.log("myprice : " + price);
+}
+btnEle.addEventListener("click",()=> addToCart(ele.image,ele.price))
+})
+
+}
+getData();
+
+
+
+  </script>
+</body>
+</html>
